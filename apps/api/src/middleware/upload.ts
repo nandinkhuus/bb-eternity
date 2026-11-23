@@ -28,3 +28,24 @@ function makeUpload(types: Set<string>) {
 
 export const upload = makeUpload(allowed);
 export const uploadImages = makeUpload(images);
+
+const mediaTypes = new Set([
+  ...images,
+  "video/mp4",
+  "video/webm",
+  "video/quicktime",
+  "video/ogg",
+  "video/x-m4v",
+]);
+
+export const uploadMedia = multer({
+  storage: multer.memoryStorage(),
+  limits: { fileSize: 80 * 1024 * 1024, files: 16 },
+  fileFilter: (_req, file, cb) => {
+    if (!mediaTypes.has(file.mimetype)) {
+      cb(new AppError(400, "Зураг эсвэл видео файл оруулна уу"));
+      return;
+    }
+    cb(null, true);
+  },
+});

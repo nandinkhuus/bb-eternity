@@ -41,7 +41,7 @@ export default function AssetsPage() {
         {isLoading && <TableSkeleton />}
         {isError && <ErrorState onRetry={() => refetch()} />}
         {data?.items?.length === 0 && (
-          <EmptyState title="Бүтээгдэхүүн алга" description="Захиалга хүргэгдсэний дараа энд харагдана." actionHref="/products" actionLabel="Каталог" />
+          <EmptyState title="Бүтээгдэхүүн алга" description="Захиалга хүргэгдсэний дараа энд харагдана." actionHref="/" actionLabel="Каталог" />
         )}
         <div className="grid gap-4 md:grid-cols-2">
           {(data?.items || []).map((a: any) => (

@@ -16,3 +16,4 @@ export * from "./Document";
 export * from "./AuditLog";
 export * from "./RefreshToken";
 export * from "./AssetStatusHistory";
+export * from "./AirportContent";

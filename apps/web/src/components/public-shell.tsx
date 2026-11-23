@@ -7,16 +7,26 @@ import { SearchCommand } from "./search-command";
 import { NotificationDropdown } from "./notification-dropdown";
 import { useAuth, isStaff } from "@/lib/auth";
 import { useCart } from "@/lib/cart";
-import { ShoppingCart, Menu, X } from "lucide-react";
+import { ChevronDown, ShoppingCart, Menu, X } from "lucide-react";
 import { useState } from "react";
 import { Button } from "./ui/button";
 import { cn } from "@/lib/utils";
 
-const nav = [
-  { href: "/", label: "Нүүр" },
-  { href: "/products?productType=HARDWARE", label: "Тоног төхөөрөмж" },
-  { href: "/products?productType=SOFTWARE", label: "Программ хангамж" },
-  { href: "/services", label: "Үйлчилгээ" },
+const nav: {
+  href: string;
+  label: string;
+  children?: { href: string; label: string }[];
+}[] = [
+  { href: "/?productType=HARDWARE", label: "Тоног төхөөрөмж" },
+  { href: "/?productType=SOFTWARE", label: "Программ хангамж" },
+  {
+    href: "/services",
+    label: "Үйлчилгээ",
+    children: [
+      { href: "/services", label: "Үйлчилгээ" },
+      { href: "/airport-content", label: "Reklam гаргах боломж" },
+    ],
+  },
   { href: "/quotation", label: "Үнийн санал" },
   { href: "/contact", label: "Холбоо барих" },
 ];
@@ -31,22 +41,52 @@ export function AppHeader() {
   return (
     <header className="sticky top-0 z-30 border-b border-[#E5E7EB] bg-white/95 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4">
-        <Link href="/">
-          <Logo />
-        </Link>
+        <Logo />
         <nav className="hidden items-center gap-6 text-sm lg:flex">
-          {nav.map((n) => (
-            <Link
-              key={n.href}
-              href={n.href}
-              className={cn(
-                "text-[#374151] hover:text-primary",
-                pathname === n.href && "font-medium text-primary"
-              )}
-            >
-              {n.label}
-            </Link>
-          ))}
+          {nav.map((n) =>
+            n.children ? (
+              <div key={n.href} className="group relative">
+                <Link
+                  href={n.href}
+                  className={cn(
+                    "inline-flex items-center gap-1 text-[#374151] hover:text-primary",
+                    (pathname === n.href || n.children.some((child) => pathname === child.href)) &&
+                      "font-medium text-primary"
+                  )}
+                >
+                  {n.label}
+                  <ChevronDown className="h-3.5 w-3.5" />
+                </Link>
+                <div className="invisible absolute left-0 top-full z-40 pt-2 opacity-0 transition group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+                  <div className="card min-w-56 p-2 shadow-lg">
+                    {n.children.map((child) => (
+                      <Link
+                        key={child.href}
+                        href={child.href}
+                        className={cn(
+                          "block rounded-md px-3 py-2 text-[#374151] hover:bg-primary-light hover:text-primary",
+                          pathname === child.href && "font-medium text-primary"
+                        )}
+                      >
+                        {child.label}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <Link
+                key={n.href}
+                href={n.href}
+                className={cn(
+                  "text-[#374151] hover:text-primary",
+                  pathname === n.href && "font-medium text-primary"
+                )}
+              >
+                {n.label}
+              </Link>
+            )
+          )}
         </nav>
         <div className="flex items-center gap-2">
           <SearchCommand />
@@ -76,9 +116,21 @@ export function AppHeader() {
       {open && (
         <div className="border-t border-[#E5E7EB] bg-white px-4 py-3 lg:hidden">
           {nav.map((n) => (
-            <Link key={n.href} href={n.href} className="block py-2 text-sm" onClick={() => setOpen(false)}>
-              {n.label}
-            </Link>
+            <div key={n.href}>
+              <Link href={n.href} className="block py-2 text-sm" onClick={() => setOpen(false)}>
+                {n.label}
+              </Link>
+              {n.children?.map((child) => (
+                <Link
+                  key={child.href}
+                  href={child.href}
+                  className="block py-2 pl-4 text-sm text-[#6B7280]"
+                  onClick={() => setOpen(false)}
+                >
+                  {child.label}
+                </Link>
+              ))}
+            </div>
           ))}
         </div>
       )}
@@ -99,8 +151,8 @@ export function AppFooter() {
         <div>
           <h4 className="mb-3 text-sm font-semibold">Бүтээгдэхүүн</h4>
           <ul className="space-y-2 text-sm text-white/75">
-            <li><Link href="/products?productType=HARDWARE">Тоног төхөөрөмж</Link></li>
-            <li><Link href="/products?productType=SOFTWARE">Программ хангамж</Link></li>
+            <li><Link href="/?productType=HARDWARE">Тоног төхөөрөмж</Link></li>
+            <li><Link href="/?productType=SOFTWARE">Программ хангамж</Link></li>
           </ul>
         </div>
         <div>
@@ -109,6 +161,7 @@ export function AppFooter() {
             <li><Link href="/services">Суурилуулалт</Link></li>
             <li><Link href="/services">Засвар үйлчилгээ</Link></li>
             <li><Link href="/services">Техникийн дэмжлэг</Link></li>
+            <li><Link href="/airport-content">Reklam гаргах боломж</Link></li>
           </ul>
         </div>
         <div>

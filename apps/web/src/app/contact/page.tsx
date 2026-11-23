@@ -9,8 +9,8 @@ export default function ContactPage() {
         <div className="card mt-6 space-y-2 p-5 text-sm">
           <p>Bayan Burd Eternity</p>
           <p className="text-[#6B7280]">Улаанбаатар, Монгол Улс</p>
-          <p>Имэйл: hello@eternity.mn</p>
-          <p>Утас: 7700-1122</p>
+          <p>Имэйл: info@bb-eternity.mn</p>
+          <p>Утас: 8690 7858</p>
         </div>
       </div>
       <AppFooter />

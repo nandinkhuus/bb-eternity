@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { AppFooter, AppHeader } from "@/components/public-shell";
 
 export default function ServicesPage() {
@@ -19,6 +20,10 @@ export default function ServicesPage() {
               <p className="mt-2 text-sm text-[#6B7280]">{d}</p>
             </div>
           ))}
+          <Link href="/airport-content" className="card p-5 transition hover:border-primary/30 hover:shadow-md">
+            <h2 className="text-sm font-semibold">Reklam гаргах боломж</h2>
+            <p className="mt-2 text-sm text-[#6B7280]">Нисэх буудлын реклам байршуулах боломж, зураг болон видео.</p>
+          </Link>
         </div>
       </div>
       <AppFooter />

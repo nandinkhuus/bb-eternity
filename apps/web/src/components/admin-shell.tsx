@@ -30,6 +30,7 @@ import {
   Settings,
   Menu,
   LogOut,
+  Clapperboard,
 } from "lucide-react";
 
 const groups = [
@@ -67,6 +68,10 @@ const groups = [
       { href: "/admin/issues", label: "Issues", icon: CircleDot },
       { href: "/admin/service-history", label: "Service History", icon: History },
     ],
+  },
+  {
+    label: "КОНТЕНТ",
+    items: [{ href: "/admin/airport-content", label: "Airport Content", icon: Clapperboard }],
   },
   {
     label: "SYSTEM",
@@ -107,9 +112,7 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
   const side = (
     <aside className="flex h-full w-[250px] flex-col bg-primary-dark text-white">
       <div className="border-b border-white/10 px-4 py-4">
-        <Link href="/admin">
-          <Logo light />
-        </Link>
+        <Logo light />
       </div>
       <nav className="flex-1 overflow-y-auto p-3 text-[13px]">
         {groups.map((g) => (

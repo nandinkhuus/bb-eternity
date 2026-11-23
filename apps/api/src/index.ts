@@ -20,6 +20,7 @@ import searchRoutes from "./routes/search";
 import documentRoutes from "./routes/documents";
 import adminRoutes from "./routes/admin";
 import dashboardRoutes from "./routes/dashboard";
+import airportContentRoutes from "./routes/airport-content";
 
 async function main() {
   const app = express();
@@ -74,6 +75,7 @@ async function main() {
   app.use("/api", documentRoutes);
   app.use("/api/admin", adminRoutes);
   app.use("/api/dashboard", dashboardRoutes);
+  app.use("/api/airport-content", airportContentRoutes);
 
   app.use(errorHandler);
 

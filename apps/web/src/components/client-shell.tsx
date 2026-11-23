@@ -57,9 +57,7 @@ export function ClientShell({ children }: { children: React.ReactNode }) {
   const side = (
     <aside className="flex h-full w-[250px] flex-col bg-primary-dark text-white">
       <div className="border-b border-white/10 px-4 py-4">
-        <Link href="/">
-          <Logo light />
-        </Link>
+        <Logo light />
       </div>
       <nav className="flex-1 space-y-0.5 overflow-y-auto p-3 text-[13px]">
         {items.map((it) => {
