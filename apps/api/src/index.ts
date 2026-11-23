@@ -24,6 +24,15 @@ import dashboardRoutes from "./routes/dashboard";
 async function main() {
   const app = express();
   app.set("trust proxy", 1);
+  // A trailing slash on NEXT_PUBLIC_API_URL produces //api/... which Express does not match.
+  app.use((req, _res, next) => {
+    const queryAt = req.url.indexOf("?");
+    const pathname = queryAt === -1 ? req.url : req.url.slice(0, queryAt);
+    const query = queryAt === -1 ? "" : req.url.slice(queryAt);
+    const normalized = pathname.replace(/\/{2,}/g, "/");
+    if (normalized !== pathname) req.url = normalized + query;
+    next();
+  });
   app.use(helmet({ crossOriginResourcePolicy: { policy: "cross-origin" } }));
   app.use(
     cors({
