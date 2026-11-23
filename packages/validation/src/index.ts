@@ -126,7 +126,7 @@ export const quotationSchema = z.object({
   contactName: z.string().min(1),
   email: z.string().email(),
   phone: z.string().min(6),
-  requirements: z.string().optional(),
+  requirements: z.string().min(1),
   items: z
     .array(
       z.object({
