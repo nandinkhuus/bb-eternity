@@ -116,8 +116,8 @@ export default function AirportContentPage() {
       <AppHeader />
       <div className="mx-auto max-w-5xl px-4 py-12">
         <p className="text-[13px] font-semibold tracking-[0.16em] text-orange">ҮЙЛЧИЛГЭЭ</p>
-        <h1 className="mt-2 text-2xl font-semibold leading-tight md:text-3xl">
-          &quot;Чингис хаан&quot; ОУНБ -дээр реклам гаргах боломжийг таньд санал болгож байна
+        <h1 className="mt-2 text-[1.2rem] font-semibold leading-tight">
+          &quot;Чингис хаан&quot; ОУНБ -дээр реклам 50 дэлгэцээр реклам гаргах боломжийг таньд санал болгож байна.
         </h1>
         <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[#6B7280]">
           Реклам хүлээж авах Имэйл: info@bb-eternity.mn, Утас: 8690 7858
