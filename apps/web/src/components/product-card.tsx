@@ -13,10 +13,10 @@ export function ProductCard({ product }: { product: any }) {
   const thumb = productThumb(product);
   return (
     <div className="card flex flex-col overflow-hidden transition hover:shadow-md">
-      <div className="flex h-40 items-center justify-center bg-primary-light text-primary">
+      <div className="flex h-44 items-center justify-center bg-white text-primary">
         {thumb ? (
           // eslint-disable-next-line @next/next/no-img-element
-          <img src={thumb} alt="" className="h-full w-full object-cover" />
+          <img src={thumb} alt={product.name} className="h-full w-full object-contain" />
         ) : (
           <span className="text-sm font-medium">{product.sku}</span>
         )}

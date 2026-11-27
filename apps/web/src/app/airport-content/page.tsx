@@ -139,9 +139,6 @@ export default function AirportContentPage() {
           {items.map((item) => (
             <article key={item._id} className="card p-5 md:p-6">
               <h2 className="text-lg font-semibold">{item.title}</h2>
-              {item.content && (
-                <p className="mt-3 whitespace-pre-wrap text-sm leading-relaxed text-[#374151]">{item.content}</p>
-              )}
               {item.images.length > 0 && (
                 <div className="mt-5 grid grid-cols-2 gap-3 md:grid-cols-3">
                   {item.images.map((src, index) => (
